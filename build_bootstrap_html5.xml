@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?><project name="dita2bootstrap" default="dita2bootstrap">
+
+  <property name="transtype" value="bootstrap"></property>
+  <dirname property="dita2bootstrap.dir" file="${ant.file.dita2bootstrap}"></dirname>
+
+  <target name="dita2bootstrap">
+
+    <antcall target="dita2d4p-html5">
+      <param name="map2html5.style" value="${dita2bootstrap.dir}/xsl/map2bootstrap.xsl"></param>
+      <param name="html5.site.theme" value="html5-bootstrap"></param>
+      <param name="html5.theme.config.dir" value="${dita2bootstrap.dir}/theme"></param>
+      <param name="html5.theme.dir" value="${dita2bootstrap.dir}/cached-themes/html5-bootstrap"></param>
+    </antcall>
+
+  </target>
+
+</project>
