@@ -1,8 +1,8 @@
 // add div for facebook
 $(function() {
 
-  var site_head = document.getElementById('site-head'),
-  headerHeadRoom = new  new Headroom(elem, {
+  var header = document.getElementById('site-head'),
+  headerHeadRoom =  new Headroom(header, {
     offset: 205,
     tolerance: 5,
     classes: {
