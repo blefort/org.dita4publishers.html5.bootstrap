@@ -28,4 +28,10 @@ $(function() {
     , 600);
   });
 
+  $('body').scrollspy({ target: '#side-navigation' })
+  $('abbr').popover({delay: { "show": 500, "hide": 100 }});
+  $('html').click(function() {
+    $('.popover').popover('hide');
+  });
+
 });
