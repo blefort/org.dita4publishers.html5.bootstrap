@@ -27,6 +27,8 @@
   exclude-result-prefixes="df xs relpath htmlutil xd dc"
   version="2.0">
 
+  <xsl:import href="map2boostrapNav.xsl" />
+
 
   <xsl:template mode="toc-title" match="*[df:isTopicRef(.)] | *[df:isTopicHead(.)]">
     <xsl:variable name="titleValue" select="df:getNavtitleForTopicref(.)"/>
