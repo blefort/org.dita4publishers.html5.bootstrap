@@ -111,3 +111,31 @@ article, #side-navigation {
   list-style-position: outside;
   list-style-type: none;
 }
+
+#search_result {
+  margin-top:120px;
+}
+
+#search {
+  position:relative;
+}
+
+#searchClose {
+  position:absolute;
+  border:none;
+  background:none;
+  background-color: none;
+  right:22px;
+  top:4px;
+  display:block;
+  width:20px;
+  height:20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+#searchClose:hover {
+  cursor:pointer;
+}
+

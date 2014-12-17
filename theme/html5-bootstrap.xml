@@ -32,8 +32,11 @@
     </attributes>
     <value></value>
     <source>
-      <file path="html5-bootstrap/bootstrap-3.2.0/css/bootstrap.css"/>
-      <file path="html5-bootstrap/bootstrap-3.2.0/css/bootstrap-theme.css" />
+      <file path="html5-bootstrap/bootstrap/css/bootstrap.css"/>
+      <file path="html5-bootstrap/bootstrap/css/bootstrap-theme.css" />
+      <file path="html5-bootstrap/font-awesome-4.2.0/css/font-awesome.min.css" />
+      <file path="html5-bootstrap/d4p-boostrap/css/custom.css"/>
+      <file path="html5-bootstrap/d4p-boostrap/css/header.css"/>
     </source>
   </tag>
 
@@ -46,7 +49,7 @@
       <rel>stylesheet</rel>
       <type>text/css</type>
       <media>screen, projection, print</media>
-      <src>http://fonts.googleapis.com/css?family=Open+Sans</src>
+      <src>http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700</src>
     </attributes>
     <value></value>
   </tag>
@@ -65,7 +68,7 @@
     <value></value>
   </tag>
 
-  <tag>
+  <tag position="footer">
     <name>script</name>
     <output>yes</output>
     <filename>script.js</filename>
@@ -77,8 +80,21 @@
     <value></value>
     <source>
       <file path="html5-bootstrap/jQuery/jquery.js"/>
-      <file path="html5-bootstrap/bootstrap-3.2.0/js/bootstrap.js"/>
+      <file path="modules/d4p/js/d4p.js"/>
+      <file path="html5-bootstrap/bootstrap/js/bootstrap.js"/>
+      <file path="html5-bootstrap/d4p-boostrap/js/ie10-viewport-bug-workaround.js"/>
+      <file path="html5-bootstrap/d4p-boostrap/js/headroom.js"/>
+      <file path="modules/DataTables-1.10.4/media/js/jquery.dataTables.js" />
+      <file path="modules/lunr/lunr.js" />
+      <file path="modules/lunr/html5-lunr.js" />
+      <file path="html5-bootstrap/d4p-boostrap/js/script.js"/>
     </source>
   </tag>
 
+  <d4p>
+    <l>
+      <var name="searchPageHeading" string="searchPageHeading" />
+      <var name="close" string="close" />
+    </l>
+  </d4p>
 </html5>

@@ -118,10 +118,16 @@
   <!-- used to output the html5 header -->
   <xsl:template match="*" mode="generate-header">
     <xsl:param name="documentation-title" as="xs:string" select="''" tunnel="yes" />
-  <div class="navbar navbar-inverse" role="navigation">
-      <div class="container">
+    <header id="site-head" class="header header--fixed">
+      <nav id="topNav" class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+          <!--div class="navbar-header">
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="...">
+          </a>
+        </div-->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -129,25 +135,42 @@
           </button>
           <a class="navbar-brand" href="#"><xsl:value-of select="$documentation-title" /></a>
         </div>
-        <!--div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div--><!--/.nav-collapse -->
-      </div>
-    </div>
+
+        <xsl:call-template name="gen-search-box" />
+
+        <ul class="nav navbar-nav navbar-right hidden-xs">
+          <li class="dropdown share">
+            <a href="#" class="dropdown-toggle  btn-lg btn" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa  fa-share-alt"></span><span class="sr-only">Share</span><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Tweeter</a></li>
+              <li><a href="#">Email</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle btn-lg btn" data-toggle="dropdown" role="button" aria-expanded="false">
+              <span class="fa fa-download"></span><span class="sr-only">Download</span><span class="caret"></span>
+            </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">PDF</a></li>
+                  <li><a href="#">Epub</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+      </nav>
+      <div id="msg-version"></div>
+    </header>
 
   </xsl:template>
 
-  <xsl:template match="*" mode="gen-search-box">
-    <!--xsl:variable name="placeholder" select="$HTML5THEMECONFIGDOC/html5/search/placeholder" />
-    <xsl:variable name="action" select="$HTML5THEMECONFIGDOC/html5/search/action" />
-    <form id="search" action="{$action}">
-      <input id="search-text" type="text" autocomplete="off" placeholder="{$placeholder}" name="search" />
-      <xsl:sequence select="$HTML5THEMECONFIGDOC/html5/search/inputs/*" />
-    </form-->
+  <xsl:template name="gen-search-box">
+    <form id="search" class="navbar-form navbar-right" role="search">
+      <div class="form-group">
+        <input id="search-text" type="text" class="form-control" placeholder="Search"/>
+      </div>
+    </form>
   </xsl:template>
 
   <!-- used to output the head -->
@@ -157,7 +180,8 @@
       <xsl:apply-templates select="." mode="gen-user-top-head" />
 
       <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
       <!-- Dublin core metadata, schema -->
       <link rel="schema.DC" href="http://purl.org/dc/terms/" />
       <xsl:call-template name="getMeta"/>
@@ -247,7 +271,10 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-xs-12 col-md-8">
+          <xsl:apply-templates select="." mode="generate-main-content"/>
+        </div>
+        <div class="col-xs-6 col-md-4">
           <xsl:if test="$OUTPUTDEFAULTNAVIGATION">
             <xsl:choose>
               <xsl:when test="$is-root">
@@ -262,10 +289,6 @@
               </xsl:otherwise>
             </xsl:choose>
           </xsl:if>
-
-        </div>
-        <div class="col-md-9">
-          <xsl:apply-templates select="." mode="generate-main-content"/>
         </div>
       </div>
     </div>
@@ -275,30 +298,20 @@
   <xsl:template match="*" mode="generate-main-content">
     <xsl:param name="is-root" as="xs:boolean"  tunnel="yes" select="false()" />
     <xsl:param name="content" tunnel="yes" />
-    <div id="{$IDMAINCONTENT}">
-      <xsl:attribute name="class">
+    <div id="page" class="starter-template">
+      <article>
+        <xsl:apply-templates select="." mode="generate-breadcrumb"/>
         <xsl:choose>
-          <xsl:when test="$is-root">
-            <xsl:value-of select="$CLASSROOTMAINCONTENT" />
+          <xsl:when test="$content">
+            <div id="topic-content">
+              <xsl:sequence select="$content" />
+            </div>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="$CLASSMAINCONTENT" />
+            <xsl:apply-templates select="." mode="generate-main"/>
           </xsl:otherwise>
         </xsl:choose>
-      </xsl:attribute>
-          <section>
-            <xsl:apply-templates select="." mode="generate-breadcrumb"/>
-            <xsl:choose>
-              <xsl:when test="$content">
-                <div id="topic-content">
-                  <xsl:sequence select="$content" />
-                </div>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:apply-templates select="." mode="generate-main"/>
-              </xsl:otherwise>
-              </xsl:choose>
-            </section>
+      </article>
       <div class="clear" /><xsl:sequence select="'&#x0a;'"/>
     </div>
   </xsl:template>
