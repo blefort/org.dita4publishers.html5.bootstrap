@@ -84,9 +84,11 @@
       <file path="html5-bootstrap/bootstrap/js/bootstrap.js"/>
       <file path="html5-bootstrap/d4p-boostrap/js/ie10-viewport-bug-workaround.js"/>
       <file path="html5-bootstrap/d4p-boostrap/js/headroom.js"/>
+      <file path="modules/jQuery-widgets/navigation/classic/js/navigation.js" />
       <file path="modules/DataTables-1.10.4/media/js/jquery.dataTables.js" />
       <file path="modules/lunr/lunr.js" />
       <file path="modules/lunr/html5-lunr.js" />
+      <file path="modules/TouchSwipe/jquery.touchSwipe.js"/>
       <file path="html5-bootstrap/d4p-boostrap/js/script.js"/>
     </source>
   </tag>
