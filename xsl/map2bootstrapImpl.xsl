@@ -300,7 +300,6 @@
     <xsl:param name="content" tunnel="yes" />
     <div id="page" class="starter-template">
       <article>
-        <xsl:apply-templates select="." mode="generate-breadcrumb"/>
         <xsl:choose>
           <xsl:when test="$content">
             <div id="topic-content">
