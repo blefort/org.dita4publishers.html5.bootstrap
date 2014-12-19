@@ -6944,6 +6944,20 @@ article, #side-navigation {
   cursor:pointer;
 }
 
+#touch {
+  display:block;
+  position:absolute:
+  height:100%;
+  width:100%;
+}
+.anchor {
+  position:relative;
+  top:-100px;
+}
+
+.highlight {
+  background-color:yellow;
+}
 #msg-version {
   border-top:3px solid #FFA500;
   display: block;
