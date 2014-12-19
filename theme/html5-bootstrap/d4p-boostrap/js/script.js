@@ -1,3 +1,9 @@
+// Disable searching and ordering by default for datatable
+$.extend( $.fn.dataTable.defaults, {
+    searching: false,
+    ordering:  false
+});
+
 // add div for facebook
 $(function() {
 
@@ -35,11 +41,16 @@ $(function() {
   /**
    * Navigation
    */
-  if(!$('body').hasClass('homepage'))
+  if(!$('body').hasClass('homepage') && !d4p.mapIsChunked())
   {
     navigation.init();
   }
 
+  if(d4p.mapIsChunked())
+  {
+    $('#side-navigation').addClass('affix').find('li').removeClass('active');
+    $('body').scrollspy({ target: '#side-navigation' })
+  }
   //$('body').scrollspy({ target: '#side-navigation' })
 
   /**
@@ -57,47 +68,69 @@ $(function() {
   var idx = new searchIdx(),
   closeBtn = $('<button />').attr('id', 'searchClose').attr('class', 'float_right').append($('<span />').attr('class', 'fa fa-close')).append($('<span />').html(d4p.l.close).attr('class', 'hidden')).hide();
 
-  idx.getData();
-  idx.searchResultPlaceholder();
-
   $('#search-text').after(closeBtn);
-
-  closeBtn.on('click', function(){
-    $('#page').children().show();
-    $('#search_result').hide();
-    $('#search-text').val('');
-    $(this).hide();
-   });
 
   $( "#search" ).submit(function( event ) {
     event.preventDefault();
   });
 
-  $('#search-text').keyup(function( event ) {
-    if($(this).val().length > d4p.search.minlength)
-    {
-      idx.search($(this).val());
-      idx.output();
-      $('#page').children().hide();
-      $('#search_result').show();
+  if(d4p.mapIsChunked())
+  {
+    $('#search-text').keyup(function( event ) {
+      $('#page').unhighlight();
+      $('#page').highlight($(this).val());
       $('#searchClose').show();
-    }
-  });
+    });
 
-  $("body").swipe( {
-    //Generic swipe handler for all directions
-    swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-      if(duration == swipeLeft && d4p.previousTopicHref !== null && d4p.previousTopicHref !== '')
+    closeBtn.on('click', function(){
+      $('.highlight').remove();
+      $('#search-text').val('');
+      $(this).hide();
+    });
+
+  } else {
+    idx.getData();
+    idx.searchResultPlaceholder();
+
+    closeBtn.on('click', function(){
+      $('#page').children().show();
+      $('#search_result').hide();
+      $('#search-text').val('');
+      $(this).hide();
+    });
+
+    $('#search-text').keyup(function( event ) {
+      if($(this).val().length > d4p.search.minlength)
       {
-        document.location = d4p.getDocumentationRoot + d4p.previousTopicHref;
+        idx.search($(this).val());
+        idx.output();
+        $('#page').children().hide();
+        $('#search_result').show();
+        $('#searchClose').show();
       }
-      if(duration == swipeRight && d4p.nextTopicHref !== null && d4p.nextTopicHref !== '')
-      {
-        document.location = d4p.getDocumentationRoot + d4p.nextTopicHref;
-      }
-    },
-    //Default is 75px, set to 0 for demo so any distance triggers swipe
-    threshold:30
-  });
+    });
+}
+
+// var myElement = document.getElementById('touch');
+//
+// // create a simple instance
+// // by default, it only adds horizontal recognizers
+// var mc = new Hammer(myElement);
+//
+// // let the pan gesture support all directions.
+// // this will block the vertical scrolling on a touch-device while on the element
+// mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+//
+// // listen to events...
+// mc.on("panleft panright panup pandown tap press", function(ev) {
+//      if(ev.type == 'panleft' && d4p.previousTopicHref !== null && d4p.previousTopicHref !== '')
+//        {
+//          document.location = d4p.getDocumentationRoot() + d4p.previousTopicHref;
+//       }
+//       if(ev.type == 'panright' && d4p.nextTopicHref !== null && d4p.nextTopicHref !== '')
+//        {
+//          document.location = d4p.getDocumentationRoot() + d4p.nextTopicHref;
+//       }
+//});
 
 });

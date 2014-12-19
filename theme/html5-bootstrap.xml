@@ -81,14 +81,23 @@
     <source>
       <file path="html5-bootstrap/jQuery/jquery.js"/>
       <file path="modules/d4p/js/d4p.js"/>
+      <file path="modules/highlight/highlight.js"/>
       <file path="html5-bootstrap/bootstrap/js/bootstrap.js"/>
-      <file path="html5-bootstrap/d4p-boostrap/js/ie10-viewport-bug-workaround.js"/>
+      <file path="html5-bootstrap/d4p-boostrap/js/IE10-viewport-bug-workarround.js"/>
       <file path="html5-bootstrap/d4p-boostrap/js/headroom.js"/>
       <file path="modules/jQuery-widgets/navigation/classic/js/navigation.js" />
       <file path="modules/DataTables-1.10.4/media/js/jquery.dataTables.js" />
       <file path="modules/lunr/lunr.js" />
       <file path="modules/lunr/html5-lunr.js" />
-      <file path="modules/TouchSwipe/jquery.touchSwipe.js"/>
+      <!--file path="modules/hammer.js/hammer.js"/-->
+      <!--file path="modules/syntaxhighlighter_3.0.83/scripts/shCore.js"/>
+      <file path="modules/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"/>
+      <file path="modules/syntaxhighlighter_3.0.83/scripts/shBrushXML.js"/>
+      <file path="modules/syntaxhighlighter_3.0.83/scripts/shBrushPhp.js"/>
+      <file path="modules/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"/>
+      <file path="modules/syntaxhighlighter_3.0.83/scripts/shBrushBash.js"/>
+      <file path="modules/syntaxhighlighterAdapter/syntaxHighlighterAdapter.js"/-->
+
       <file path="html5-bootstrap/d4p-boostrap/js/script.js"/>
     </source>
   </tag>
