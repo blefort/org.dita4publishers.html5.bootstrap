@@ -37,7 +37,7 @@
     <xsl:param name="documentation-title" tunnel="yes" />
     <xsl:param name="is-root" as="xs:boolean" tunnel="yes" select="false()" />
 
-    <nav id="side-navigation" class="bs-docs-sidebar hidden-print hidden-xs hidden-sm">
+    <nav id="side-navigation" class="bs-docs-sidebar hidden-print hidden-xs">
           <xsl:variable name="listItems" as="node()*">
             <xsl:apply-templates mode="generate-html5-nav"
               select=".
@@ -51,9 +51,6 @@
 
         <xsl:if test="$listItems">
           <ul class="nav bs-docs-sidenav">
-            <li class="toc_link"><a href="index.html"><xsl:call-template name="getString">
-              <xsl:with-param name="stringName" select="'TOC'"/>
-            </xsl:call-template></a></li>
             <xsl:sequence select="$listItems"/>
           </ul>
         </xsl:if>
@@ -61,9 +58,9 @@
 
   </xsl:template>
 
-   <xsl:template name="nav-child-items">
+  <xsl:template name="nav-child-items">
     <xsl:param name="listItems" as="node()*" />
-    <ul>
+    <ul class="nav">
       <xsl:sequence select="$listItems"/>
     </ul>
   </xsl:template>
