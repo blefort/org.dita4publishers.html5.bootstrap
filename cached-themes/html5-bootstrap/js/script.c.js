@@ -28048,11 +28048,11 @@ $(function() {
 
   } else if(!d4p.root) {
     navigation.nav.id = '#side-navigation';
-    navigation.cs.expand = ' fa fa-expand ';
-    navigation.cs.collapse = ' fa fa-compress ';
-    navigation.cs.close =  'fa fa-close ';
-    navigation.cs.plus =  'fa fa-plus';
-    navigation.cs.minus =  'fa fa-minus';
+    navigation.cs.expand = 'ic fa fa-expand ';
+    navigation.cs.collapse = 'ic fa fa-compress ';
+    navigation.cs.close =  'ic fa fa-close ';
+    navigation.cs.plus =  'ic fa fa-plus';
+    navigation.cs.minus =  'ic fa fa-minus';
     navigation.init();
   }
   //$('body').scrollspy({ target: '#side-navigation' })

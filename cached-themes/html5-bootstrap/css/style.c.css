@@ -6816,16 +6816,35 @@ a.navbar-brand, a.navbar-brand:link, a.navbar-brand:visited {
   color:#FFF;
 }
 
+/** Footer **/
+#topicsNPLinks
+{
+  margin-top:30px;
+  border-top:1px dashed #ccc;
+  padding:1.5em 0;
+}
 
-footer {
+#topicsNPLinks .previous {
+  float:left;
+}
+
+#topicsNPLinks .next {
+  float:right;
+}
+
+#topicsNPLinks span.fa {
+  font-size:1.4em;
+}
+
+#main-footer {
   background-color:#efefef;
   min-height:250px;
   width:100%;
   margin-top:50px;
-  border-top:2px solid #83d6bd;
+  border-top:2px solid #ffa500;
 }
 
-
+/** navigation **/
 #side-navigation ul li {
   padding:0;
   margin:0;
@@ -7133,7 +7152,7 @@ ul li.collapsible {
   display:block;
 }
 
-li.collapsible span {
+li.collapsible span.ic {
   display:block;
   position:absolute;
   top:4px;
