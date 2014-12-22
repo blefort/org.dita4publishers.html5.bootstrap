@@ -6809,6 +6809,7 @@ button.close {
 
 body {
   position:relative;
+  padding-top:70px;
 }
 
 a.navbar-brand, a.navbar-brand:link, a.navbar-brand:visited {
@@ -6824,9 +6825,6 @@ footer {
   border-top:2px solid #83d6bd;
 }
 
-article, #side-navigation {
-  margin-top:80px;
-}
 
 #side-navigation ul li {
   padding:0;
@@ -6834,13 +6832,18 @@ article, #side-navigation {
 }
 
 #side-navigation ul li a {
-  margin:0.4em 0;
-  padding:0;
-  padding-left:18px;
+  margin:0.3em 0;
+  padding:0 0 0 6px;
 }
 
-#side-navigation ul li ul li a {
-  padding-left:30px;
+#side-navigation ul ul {
+  padding-left:12px;
+}
+
+
+.bs-docs-sidebar .nav > .active > a, .bs-docs-sidebar .nav > .active:hover > a, .bs-docs-sidebar .nav > .active:focus > a {
+  border-left:none;
+  color: #563d7c;
 }
 
 .bs-docs-nav {
@@ -6866,59 +6869,31 @@ article, #side-navigation {
 }
 .bs-docs-nav .navbar-header .navbar-toggle {
     border-bottom-color: #fff;
-    border-left-color-ltr-source: physical;
-    border-left-color-rtl-source: physical;
-    border-left-color-value: #fff;
-    border-right-color-ltr-source: physical;
-    border-right-color-rtl-source: physical;
-    border-right-color-value: #fff;
     border-top-color: #fff;
 }
 .bs-docs-nav .navbar-header .navbar-toggle:hover, .bs-docs-nav .navbar-header .navbar-toggle:focus {
     background-color: #f9f9f9;
     border-bottom-color: #f9f9f9;
-    border-left-color-ltr-source: physical;
-    border-left-color-rtl-source: physical;
-    border-left-color-value: #f9f9f9;
-    border-right-color-ltr-source: physical;
-    border-right-color-rtl-source: physical;
-    border-right-color-value: #f9f9f9;
     border-top-color: #f9f9f9;
 }
 .bs-docs-sidebar .nav .nav > .active > a, .bs-docs-sidebar .nav .nav > .active:hover > a, .bs-docs-sidebar .nav .nav > .active:focus > a {
   font-weight: 500;
   padding-left: 28px;
-  border-left:2px solid #83d6bd;
+
 }
 
-.bs-docs-sidebar .nav > .active > a, .bs-docs-sidebar .nav > .active:hover > a, .bs-docs-sidebar .nav > .active:focus > a {
-  background-color: transparent;
-  border-left-color-ltr-source: physical;
-  border-left-color-rtl-source: physical;
-  border-left-color-value: #563d7c;
-  border-left-style-ltr-source: physical;
-  border-left-style-rtl-source: physical;
-  border-left-style-value: solid;
-  border-left-width-ltr-source: physical;
-  border-left-width-rtl-source: physical;
-  border-left-width-value: 2px;
-  color: #563d7c;
-}
-
-.bs-docs-sidebar .nav > .active > a, .bs-docs-sidebar .nav > .active:hover > a, .bs-docs-sidebar .nav > .active:focus > a {
-  border-left:2px solid #83d6bd;
-  font-weight: 700;
-  padding-left: 18px;
+.bs-docs-sidebar .nav > .active > a.selected, .bs-docs-sidebar .nav > .active:hover > a.selected, .bs-docs-sidebar .nav > .active:focus > a.selected {
+  background-color: #EFEFEF;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border-right:3px solid #ffa500;
 }
 
 .nav {
   list-style-image: none;
   list-style-position: outside;
   list-style-type: none;
-}
-
-#search_result {
-  margin-top:120px;
 }
 
 #search {
@@ -7111,4 +7086,59 @@ article, #side-navigation {
     -moz-animation-name: slideUp;
     -o-animation-name: slideUp;
     animation-name: slideUp
+}
+/**
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ *
+ */
+#nav-content { padding: 20px 0; }
+
+li.collapsible ul li {
+  margin-left: 16px;
+  position:relative;
+}
+
+li.topichead > ul > li {
+  margin-left: 0px;
+}
+
+ul li.collapsible.collapsed ul {
+  display:none;
+}
+
+ul li.collapsible {
+  cursor: pointer;
+}
+
+ul li.collapsible.collapsed ul, ul li.collapsible.collapsed > ul, ul li.collapsible.active.collapsed  > ul, ul li.topichead.collapsible.collapsed > ul {
+   display:none;
+}
+
+ul li.collapsible {
+  cursor: pointer;
+}
+
+.forced ul, .forced ul li.collapsible.collapsed ul, ul li.collapsible.active > ul, ul li.topichead  > ul, ul li.collapsible.active ul li {
+  display:block;
+}
+
+li.collapsible span {
+  display:block;
+  position:absolute;
+  top:4px;
+  left:-20px;
+  font-weight: normal;
+  z-index: 1000;
+  font-size:0.8em;
 }

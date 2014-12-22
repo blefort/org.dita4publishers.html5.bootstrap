@@ -139,13 +139,12 @@
         <xsl:call-template name="gen-search-box" />
 
         <ul class="nav navbar-nav navbar-right hidden-xs">
-          <li class="dropdown share">
+          <li id="dropdown-share" class="dropdown share">
             <a href="#" class="dropdown-toggle  btn-lg btn" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa  fa-share-alt"></span><span class="sr-only">Share</span><span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">LinkedIn</a></li>
-              <li><a href="#">Tweeter</a></li>
-              <li><a href="#">Email</a></li>
+              <li><a id="LinkFacebook" href="https://www.facebook.com/"><span class="fa fa-facebook"></span> Facebook</a></li>
+              <li><a id="LinkLinkedin" href="https://www.linkedin.com/"><span class="fa fa-linkedin"></span> LinkedIn</a></li>
+              <li><a id="LinkTwitter" href="https://twitter.com/?lang=en"><span class="fa fa-twitter"></span> Tweeter</a></li>
             </ul>
           </li>
           <li class="dropdown">
@@ -271,28 +270,41 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-md-8">
-          <xsl:apply-templates select="." mode="generate-main-content"/>
-        </div>
+
+      <xsl:if test="$navigationLeftBoolean">
         <div class="col-xs-6 col-md-4">
-          <xsl:if test="$OUTPUTDEFAULTNAVIGATION">
-            <xsl:choose>
-              <xsl:when test="$is-root">
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:variable name="navigation-fixed">
-                  <xsl:apply-templates select="$navigation" mode="fix-navigation-href">
-                    <xsl:with-param name="resultUri" select="$resultUri" />
-                  </xsl:apply-templates>
-                </xsl:variable>
-                <xsl:sequence select="$navigation-fixed"/>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:if>
+          <xsl:call-template name="navigation"/>
         </div>
+      </xsl:if>
+
+      <div class="col-xs-12 col-md-8">
+        <xsl:apply-templates select="." mode="generate-main-content"/>
+      </div>
+
+      <xsl:if test="$navigationLeftBoolean = false()">
+        <div class="col-xs-6 col-md-4">
+          <xsl:call-template name="navigation"/>
+        </div>
+      </xsl:if>
+
       </div>
     </div>
   </xsl:template>
+
+  <xsl:template name="navigation">
+    <xsl:param name="navigation" as="element()*"  tunnel="yes" />
+    <xsl:param name="is-root" as="xs:boolean"  tunnel="yes" select="false()" />
+    <xsl:param name="resultUri" as="xs:string" tunnel="yes" select="''" />
+    <xsl:if test="$OUTPUTDEFAULTNAVIGATION and $is-root = false()">
+    <xsl:variable name="navigation-fixed">
+      <xsl:apply-templates select="$navigation" mode="fix-navigation-href">
+        <xsl:with-param name="resultUri" select="$resultUri" />
+      </xsl:apply-templates>
+    </xsl:variable>
+    <xsl:sequence select="$navigation-fixed"/>
+    </xsl:if>
+  </xsl:template>
+
 
    <!-- generate main content -->
   <xsl:template match="*" mode="generate-main-content">
