@@ -165,7 +165,7 @@
   </xsl:template>
 
   <xsl:template name="gen-search-box">
-    <form id="search" class="navbar-form navbar-right" role="search">
+    <form id="search" class="navbar-form navbar-right hidden-xs" role="search">
       <div class="form-group">
         <input id="search-text" type="text" class="form-control" placeholder="Search"/>
       </div>
@@ -271,40 +271,48 @@
     <div class="container">
       <div class="row">
 
-      <xsl:if test="$navigationLeftBoolean">
-        <div class="col-xs-6 col-md-4">
-          <xsl:call-template name="navigation"/>
-        </div>
-      </xsl:if>
+        <xsl:if test="$navigationLeftBoolean">
+          <div class="col-xs-6 col-md-4">
+            <xsl:call-template name="navigation"/>
+          </div>
+        </xsl:if>
 
-      <div class="col-xs-12 col-md-8">
-        <xsl:apply-templates select="." mode="generate-main-content"/>
-      </div>
-
-      <xsl:if test="$navigationLeftBoolean = false()">
-        <div class="col-xs-6 col-md-4">
-          <xsl:call-template name="navigation"/>
+        <div class="col-xs-12 col-md-8">
+          <xsl:apply-templates select="." mode="generate-main-content"/>
         </div>
-      </xsl:if>
+
+        <xsl:if test="$navigationLeftBoolean = false()">
+          <div class="col-xs-6 col-md-4">
+            <xsl:call-template name="navigation"/>
+          </div>
+        </xsl:if>
 
       </div>
     </div>
   </xsl:template>
 
-  <xsl:template name="navigation">
-    <xsl:param name="navigation" as="element()*"  tunnel="yes" />
-    <xsl:param name="is-root" as="xs:boolean"  tunnel="yes" select="false()" />
-    <xsl:param name="resultUri" as="xs:string" tunnel="yes" select="''" />
-    <xsl:if test="$OUTPUTDEFAULTNAVIGATION and $is-root = false()">
-    <xsl:variable name="navigation-fixed">
-      <xsl:apply-templates select="$navigation" mode="fix-navigation-href">
-        <xsl:with-param name="resultUri" select="$resultUri" />
-      </xsl:apply-templates>
-    </xsl:variable>
-    <xsl:sequence select="$navigation-fixed"/>
-    </xsl:if>
-  </xsl:template>
+  <xsl:template name="formatSiblingTopicLinks">
+    <xsl:param name="href" as="xs:string"/>
+    <xsl:param name="role" as="xs:string"/>
+    <xsl:param name="title" as="xs:string"/>
 
+    <xsl:choose>
+     <xsl:when test="$role = 'next'">
+        <a href="{$href}" class="{$role}" rel="internal" title="{$title}"><span class="sr-only"><xsl:value-of select="$title"/></span><span class="fa fa-arrow-circle-o-right"></span></a>
+     </xsl:when>
+     <xsl:when test="$role = 'previous'">
+        <a href="{$href}" class="{$role}" rel="internal" title="{$title}"><span class="fa fa-arrow-circle-o-left"></span><span class="sr-only"><xsl:value-of select="$title"/></span></a>
+     </xsl:when>
+     <xsl:when test="$role = 'parent'">
+        <a href="{$href}" class="{$role}" rel="internal" title="{$title}"><span class="fa fa-arrow-circle-o-up"></span><span class="sr-only"><xsl:value-of select="$title"/></span></a>
+     </xsl:when>
+     <xsl:otherwise>
+         <a href="{$href}" class="{$role}" rel="internal" title="{$title}"><xsl:value-of select="$title"/></a>
+     </xsl:otherwise>
+
+    </xsl:choose>
+
+  </xsl:template>
 
    <!-- generate main content -->
   <xsl:template match="*" mode="generate-main-content">
@@ -320,6 +328,9 @@
           </xsl:when>
           <xsl:otherwise>
             <xsl:apply-templates select="." mode="generate-main"/>
+            <div class="row">
+              <xsl:apply-templates select="." mode="generate-previous-next-topic-links"/>
+            </div>
           </xsl:otherwise>
         </xsl:choose>
       </article>
