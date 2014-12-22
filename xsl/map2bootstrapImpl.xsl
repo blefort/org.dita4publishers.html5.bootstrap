@@ -147,7 +147,7 @@
               <li><a id="LinkTwitter" href="https://twitter.com/?lang=en"><span class="fa fa-twitter"></span> Tweeter</a></li>
             </ul>
           </li>
-          <li class="dropdown">
+          <!--li class="dropdown">
             <a href="#" class="dropdown-toggle btn-lg btn" data-toggle="dropdown" role="button" aria-expanded="false">
               <span class="fa fa-download"></span><span class="sr-only">Download</span><span class="caret"></span>
             </a>
@@ -155,7 +155,7 @@
                   <li><a href="#">PDF</a></li>
                   <li><a href="#">Epub</a></li>
                 </ul>
-              </li>
+              </li-->
             </ul>
           </div><!--/.nav-collapse -->
       </nav>
