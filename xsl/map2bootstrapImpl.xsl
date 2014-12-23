@@ -269,12 +269,12 @@
       <div class="row">
 
         <xsl:if test="$navigationLeftBoolean">
-          <div class="col-xs-6 col-md-4">
+          <div class="col-xs-6 col-md-4 hidden-xs">
             <xsl:call-template name="navigation"/>
           </div>
         </xsl:if>
 
-        <div class="col-xs-12 col-md-8 hidden-xs">
+        <div class="col-xs-12 col-md-8">
           <xsl:apply-templates select="." mode="generate-main-content"/>
         </div>
 
