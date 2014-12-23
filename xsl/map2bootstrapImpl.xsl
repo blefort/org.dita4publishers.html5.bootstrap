@@ -216,11 +216,6 @@
 
       <xsl:apply-templates select="*[contains(@class,' ditaot-d/ditaval-startprop ')]" mode="out-of-line"/>
 
-      <!-- not yet developped -->
-      <!--nav class="breadcrumb">
-        <xsl:call-template name="generateBreadcrumbs"/>
-      </nav-->
-
       <xsl:if test="$INDEXSHOW='yes'">
         <xsl:apply-templates select="/*/*[contains(@class,' topic/prolog ')]/*[contains(@class,' topic/metadata ')]/*[contains(@class,' topic/keywords ')]/*[contains(@class,' topic/indexterm ')] |
           /dita/*[1]/*[contains(@class,' topic/prolog ')]/*[contains(@class,' topic/metadata ')]/*[contains(@class,' topic/keywords ')]/*[contains(@class,' topic/indexterm ')]"/>
@@ -239,13 +234,6 @@
           <xsl:apply-templates select="*" />
         </xsl:otherwise>
       </xsl:choose>
-
-      <!-- this will include all things within topic; therefore, -->
-      <!-- title content will appear here by fall-through -->
-      <!-- followed by prolog (but no fall-through is permitted for it) -->
-      <!-- followed by body content, again by fall-through in document order -->
-      <!-- followed by related links -->
-      <!-- followed by child topics by fall-through -->
 
       <xsl:call-template name="gen-endnotes"/>    <!-- include footnote-endnotes -->
 
@@ -269,6 +257,15 @@
     <xsl:param name="resultUri" as="xs:string" tunnel="yes" select="''" />
 
     <div class="container">
+
+      <div class="row">
+        <div class="col-xs-12 col-md-21">
+          <ol class="breadcrumb">
+            <xsl:call-template name="inline-breadcrumbs"/>
+          </ol>
+        </div>
+      </div>
+
       <div class="row">
 
         <xsl:if test="$navigationLeftBoolean">
@@ -277,7 +274,7 @@
           </div>
         </xsl:if>
 
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-8 hidden-xs">
           <xsl:apply-templates select="." mode="generate-main-content"/>
         </div>
 
@@ -289,6 +286,17 @@
 
       </div>
     </div>
+  </xsl:template>
+
+
+   <xsl:template name="breadcrumbs-format-links">
+    <xsl:param name="title" as="xs:string" />
+    <xsl:param name="href" as="xs:string" />
+     <li>
+       <a class="breadcrumb" href="{$href}" title="{$title}">
+         <xsl:value-of select="$title" />
+       </a>
+     </li>
   </xsl:template>
 
   <xsl:template name="formatSiblingTopicLinks">
