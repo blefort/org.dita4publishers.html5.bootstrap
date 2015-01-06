@@ -257,11 +257,14 @@
     <xsl:param name="resultUri" as="xs:string" tunnel="yes" select="''" />
 
     <div class="container">
-
       <div class="row">
         <div class="col-xs-12 col-md-21">
           <ol class="breadcrumb">
             <xsl:call-template name="inline-breadcrumbs"/>
+            <xsl:call-template name="breadcrumbs-format-links">
+              <xsl:with-param name="title" select="df:getNavtitleForTopic(.)" as="xs:string" />
+              <xsl:with-param name="href" select="''" as="xs:string" />
+            </xsl:call-template>
           </ol>
         </div>
       </div>
@@ -293,9 +296,16 @@
     <xsl:param name="title" as="xs:string" />
     <xsl:param name="href" as="xs:string" />
      <li>
-       <a class="breadcrumb" href="{$href}" title="{$title}">
-         <xsl:value-of select="$title" />
-       </a>
+       <xsl:choose>
+         <xsl:when test="$href != ''">
+           <a class="breadcrumb" href="{$href}" title="{$title}">
+             <xsl:sequence select="$title" />
+           </a>
+         </xsl:when>
+         <xsl:otherwise>
+           <xsl:sequence select="$title" />
+         </xsl:otherwise>
+        </xsl:choose>
      </li>
   </xsl:template>
 
